@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vprodb
+  name: joycedb
   labels:
-    app: vprodb
+    app: joycedb
 spec:
   selector:
     matchLabels:
-      app: vprodb
+      app: joycedb
   replicas: 1
   template:
     metadata:
       labels:
-        app: vprodb
+        app: joycedb
     spec:
       containers:
-      - name: vprodb
+      - name: joycedb
         image: vprofile/vprofiledb 
         ports:
-        - name: vprodb-port
+        - name: joycedb-port
           containerPort: 3306
         env: 
          - name: MYSQL_ROOT_PASSWORD
@@ -28,5 +28,5 @@ spec:
                key: db-pass
 #        env:
 #         - name: MYSQL_ROOT_PASSWORD
-#           value: "vprodbpass"
+#           value: "joycedbpass"
 

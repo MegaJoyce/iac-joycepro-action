@@ -109,5 +109,5 @@ jobs:
           chart-path: helm/joyceprofilecharts
           namespace: default
           values: appimage=${{ secrets.REGISTRY }}/${{ env.ECR_REPOSITORY }},apptag=${{ github.run_number }}
-          name: joyceprofile-stack    
+          name: vprofile-stack    
     

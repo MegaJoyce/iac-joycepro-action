@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: joyceapp
+  labels: 
+    app: joyceapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: joyceapp
+  template:
+    metadata:
+      labels:
+        app: joyceapp
+    spec:
+      containers:
+      - name: joyceapp
+        image: {{ .Values.appimage}}:{{ .Values.apptag}}
+        ports:
+        - name: joyceapp-port
+          containerPort: 8080
+      initContainers:
+      - name: init-joycedb
+        image: busybox
+        command: ['sh', '-c', 'until nslookup joycedb.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
+      - name: init-memcache
+        image: busybox
+        command: ['sh', '-c', 'until nslookup joycecache01.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;']

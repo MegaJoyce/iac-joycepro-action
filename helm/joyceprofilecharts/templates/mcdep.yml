@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: joycemc
+  labels:
+    app: joycemc
+spec:
+  selector:
+    matchLabels:
+      app: joycemc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: joycemc
+    spec:
+      containers:
+      - name: joycemc
+        image: memcached
+        ports:
+        - name: joycemc-port
+          containerPort: 11211

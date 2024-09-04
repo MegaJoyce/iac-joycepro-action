@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: joycemq01
+  labels:
+    app: joycemq01
+spec:
+  selector:
+    matchLabels:
+      app: joycemq01
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: joycemq01
+    spec:
+      containers:
+      - name: joycemq01
+        image: rabbitmq
+        ports:
+        - name: joycemq01-port
+          containerPort: 15672
+        env: 
+         - name: RABBITMQ_DEFAULT_PASS
+           valueFrom:
+             secretKeyRef:
+               name: app-secret
+               key: rmq-pass
+         - name: RABBITMQ_DEFAULT_USER
+           value: "guest"
+

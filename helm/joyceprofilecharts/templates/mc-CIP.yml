@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: joycecache01
+spec:
+  ports:
+  - port: 11211
+    targetPort: joycemc-port
+    protocol: TCP
+  selector:
+    app: joycemc 
+  type: ClusterIP
